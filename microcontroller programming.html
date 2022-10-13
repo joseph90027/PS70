@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://fab.cba.mit.edu/classes/863.21/Harvard/people/ibrahimibrahim/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>joseph wu</title>
+  
+
+
+    <style>
+      body {
+        margin: 100px auto;
+        padding: 0px 100px;
+        background-color: rgb(223, 223, 223);
+        
+      }
+
+      p4{
+        font-family: "Lucida Console";
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: tomato;
+        line-height: 1;
+        margin-top: 40px;
+        margin-left: 180px;
+        word-spacing: 1px;
+      }
+
+      h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 38px;
+        color: rgb(255, 23, 178);
+        margin-top: 40px;
+        margin-left: 180px;
+        word-spacing: 5px;
+      } 
+
+      p5{
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: rgb(255, 23, 178);
+        margin-top: 60px;
+        margin-left: 180px;
+        word-spacing: 3.3px;
+        font-weight: bold;
+      }
+
+      h4{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        color: DodgerBlue;
+        color: rgb(255, 23, 178);
+        margin-left: 185px;
+        
+        font-weight: bold;
+      }
+
+      h5{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 14px;
+        color: DodgerBlue;
+        color: DodgerBlue;
+        margin-left: 185px;
+        
+        text-align: justify;
+      }
+
+      h6{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        color: DodgerBlue;
+        color: rgb(255, 23, 178);
+        margin-left: 170px;
+        
+        font-weight: bold;
+      }
+
+      a:link {
+        color: violet;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    
+      a:hover {
+        color: rgb(248, 142, 237);
+        background-color: transparent;
+        text-decoration: underline;
+      }
+
+      .fa {
+        padding: 0px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      .fa:hover {
+        opacity: 0.7;
+      }
+
+      .fa-linkedin {
+        color: DodgerBlue;
+        margin-left: 185px;
+      }
+
+      .fa-instagram {
+        color: dodgerblue;
+        margin-left: 5px;
+      } 
+
+
+    
+    </style>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1079.0" data-gr-ext-installed="">
+
+    <br>
+    <h1>PHYSCI.70  [3d Scanning and Printing] </h1>
+    <p5>JOSEPH WU</p5>
+    <p5>josephwu @ gsd . harvard . edu</p5>
+    <br>
+    <br>
+    <br>
+    <p4 style=" font-size: 14px; font-weight: normal; padding: 8px; width: 100px; outline: rgb(255, 23, 178) solid 1px; color: Gray; "> <a href="./index.html">    back </a></p4>
+    <br><br>
+    <h4 style="color:DodgerBlue;">  
+      <br><br>[ Dicing the Light ]
+    </h4>
+    <h5 style="color:DodgerBlue;">
+      Dicing the light is an interactive project that simulates the action of throwing a dice. Instead of actually "throwing" a physical dice, it will be interesting if led can replace throwing behavior. Light transforms into an exciting object!     <br><br>
+
+
+    </h5>
+
+
+
+    <h5>
+
+      <iframe width="840" height="472.5" src="https://www.youtube.com/embed/t-GOUB9TvZI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+      <br><br>
+      <br><br>
+      <img src="./microcontroller programming/IMG_7511.png" alt="missing link" width="900" height="580">
+
+      <pre><code class="language-arduino">
+
+
+        // set to 1 if we're debugging
+        #define DEBUG 0
+
+        // 6 consecutive digital pins for the LEDs
+        int first = 2;
+        int second = 3;
+        int third = 4;
+        int fourth = 5;
+        int fifth = 6;
+        int sixth = 7;
+
+        // pin for the button switch
+        int button = 12;
+        // value to check state of button switch
+        int pressed = 0;
+
+        void setup() {
+          // set all LED pins to OUTPUT
+          for (int i=first; i<=sixth; i++) {
+            pinMode(i, OUTPUT);
+          }
+          // set buttin pin to INPUT
+          pinMode(button, INPUT);
+          
+          // initialize random seed by noise from analog pin 0 (should be unconnected)
+          randomSeed(analogRead(0));
+
+          // if we're debugging, connect to serial 
+          #ifdef DEBUG
+            Serial.begin(9600);
+          #endif
+
+        }
+
+        void buildUpTension() {
+          // light LEDs from left to right and back to build up tension
+          // while waiting for the dice to be thrown
+          // left to right
+          for (int i=first; i<=sixth; i++) {
+            if (i!=first) {
+              digitalWrite(i-1, LOW);
+            }
+            digitalWrite(i, HIGH);
+            delay(100);
+          }
+          // right to left
+          for (int i=sixth; i>=first; i--) {
+            if (i!=sixth) {
+              digitalWrite(i+1, LOW);
+            }
+            digitalWrite(i, HIGH);
+            delay(100);
+          }
+        }
+
+        void showNumber(int number) {
+          digitalWrite(first, HIGH);
+          if (number >= 2) {
+            digitalWrite(second, HIGH);
+          }
+          if (number >= 3) {
+            digitalWrite(third, HIGH);    
+          }
+          if (number >= 4) {
+            digitalWrite(fourth, HIGH);    
+          }
+          if (number >= 5) {
+            digitalWrite(fifth, HIGH);    
+          }
+          if (number == 6) {
+            digitalWrite(sixth, HIGH);    
+          }
+        }
+
+        int throwDice() {
+          // get a random number in the range [1,6]
+          int randNumber = random(1,7);
+          
+          #ifdef DEBUG
+            Serial.println(randNumber);
+          #endif
+          
+          return randNumber;
+        }
+
+        void setAllLEDs(int value) {
+          for (int i=first; i<=sixth; i++) {
+            digitalWrite(i, value);
+          }
+        }
+
+        void loop() {
+          // if button is pressed - throw the dice
+          pressed = digitalRead(button);
+
+          if (pressed == HIGH) {
+            // remove previous number
+            setAllLEDs(LOW);
+            
+            buildUpTension();
+            int thrownNumber = throwDice();
+            showNumber(thrownNumber);
+          } 
+
+        }
+      </code></pre>  
+
+
+    </h5>
+
+    
+    </h
+
+      After humans overcome the metaverse hurdle, what will the next future world be? "Cyberpunk" may be the answer. Humans and machines live together through intelligent sensors; Smartphones and screens, bec6>
+
+    <br>
+
+    
+  
+
+
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
