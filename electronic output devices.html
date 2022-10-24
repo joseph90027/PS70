@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://fab.cba.mit.edu/classes/863.21/Harvard/people/ibrahimibrahim/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>joseph wu</title>
+  
+    <link rel="stylesheet" href="./joseph wu_files/font-awesome.min.css">
+
+    <style>
+      body {
+        margin: 100px auto;
+        padding: 0px 100px;
+        background-color: rgb(223, 223, 223);
+        
+      }
+
+      p4{
+        font-family: "Lucida Console";
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: tomato;
+        line-height: 1;
+        margin-top: 40px;
+        margin-left: 180px;
+        word-spacing: 1px;
+      }
+
+      h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 38px;
+        color: rgb(255, 23, 178);
+        margin-top: 40px;
+        margin-left: 180px;
+        word-spacing: 5px;
+      } 
+
+      p5{
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: rgb(255, 23, 178);
+        margin-top: 60px;
+        margin-left: 180px;
+        word-spacing: 3.3px;
+        font-weight: bold;
+      }
+
+      h4{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        color: DodgerBlue;
+        color: rgb(255, 23, 178);
+        margin-left: 185px;
+        
+        font-weight: bold;
+      }
+
+      h5{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 14px;
+        color: DodgerBlue;
+        color: DodgerBlue;
+        margin-left: 185px;
+        
+        text-align: justify;
+      }
+
+      h6{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        color: DodgerBlue;
+        color: rgb(255, 23, 178);
+        margin-left: 170px;
+        
+        font-weight: bold;
+      }
+
+      a:link {
+        color: violet;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    
+      a:hover {
+        color: rgb(248, 142, 237);
+        background-color: transparent;
+        text-decoration: underline;
+      }
+
+      .fa {
+        padding: 0px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      .fa:hover {
+        opacity: 0.7;
+      }
+
+      .fa-linkedin {
+        color: DodgerBlue;
+        margin-left: 185px;
+      }
+
+      .fa-instagram {
+        color: dodgerblue;
+        margin-left: 5px;
+      } 
+
+
+    
+    </style>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1079.0" data-gr-ext-installed="">
+
+    <br>
+    <h1>PHYSCI.70  [Electronic Input Devices] </h1>
+    <p5>JOSEPH WU</p5>
+    <p5>josephwu @ gsd . harvard . edu</p5>
+    <br>
+    <br>
+    <br>
+    <p4 style=" font-size: 14px; font-weight: normal; padding: 8px; width: 100px; outline: rgb(255, 23, 178) solid 1px; color: Gray; "> <a href="./index.html">    back </a></p4>
+    <br><br>
+    <h4 style="color:DodgerBlue;">  
+      <br><br>[ How far are you? ]
+    </h4>
+    <h5 style="color:DodgerBlue;">
+      
+      For this week's assignment, I focus on implementing an Ultrasonic proximity sensor to measure the distance between my hand and the sensor.
+      I use led light as the object to distinguish between distances. In this case, if the distance between my pond and the ultrasonic sensor is smaller than 8cm, the led on the right will shine; if it's larger than 8cm, the left one will shine.         
+
+      <br><br>
+      <br><br>
+      <iframe width="840" height="472.5" src="https://www.youtube.com/embed/4KuCh4KJ3OE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </h5>
+
+
+    <h5>
+
+      <img src="./electronic input device/IMG_7518.png" alt="missing link" width="720" height="405">
+      <br><br>
+      <img src="./electronic input device/IMG_7516.png" alt="missing link" width="720" height="405">
+      <br>
+      <br><br>
+      
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/_5e40_aa3h8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <br><br>
+      Monitor Plot of the distance
+      <br><br>
+      <br><br>
+      Arduino Code:
+      <pre><code class="language-arduino">
+
+        #define trigPin 13
+        #define echoPin 12
+        #define led 11 //red LED
+        #define led2 10 //green LED
+
+        void setup() {
+          Serial.begin (9600);
+          pinMode(trigPin, OUTPUT);
+          pinMode(echoPin, INPUT);
+          pinMode(led, OUTPUT);
+          pinMode(led2, OUTPUT);
+        }
+
+        void loop() {
+          long duration, distance;
+          digitalWrite(trigPin, LOW);  
+          
+          digitalWrite(trigPin, HIGH);
+          
+          digitalWrite(trigPin, LOW);
+          duration = pulseIn(echoPin, HIGH);
+          distance = (duration/2) / 29.1;
+          if (distance < 8) {  //you are free to change this
+          digitalWrite(led,HIGH); 
+          digitalWrite(led2,LOW);
+        }
+          else {
+          digitalWrite(led,LOW); 
+          digitalWrite(led2,HIGH);
+
+          }
+          if (distance >= 400 || distance <= 0){    //range is 400 cm for HC-SR04 sensor
+            Serial.println("Out of range");
+          }
+          else {
+            Serial.print(distance);
+            Serial.println(" cm"); //in centimeters
+          }
+          
+        }
+    
+      </code></pre> 
+    </h5>
+
+
+    </h
+
+      After humans overcome the metaverse hurdle, what will the next future world be? "Cyberpunk" may be the answer. Humans and machines live together through intelligent sensors; Smartphones and screens, bec6>
+
+    <br>
+
+    
+  
+
+
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
