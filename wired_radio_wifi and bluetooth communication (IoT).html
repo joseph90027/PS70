@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)http://fab.cba.mit.edu/classes/863.21/Harvard/people/ibrahimibrahim/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <title>joseph wu</title>
+  
+    <link rel="stylesheet" href="./joseph wu_files/font-awesome.min.css">
+
+    <style>
+      body {
+        margin: 100px auto;
+        padding: 0px 100px;
+        background-color: rgb(223, 223, 223);
+        
+      }
+
+      p4{
+        font-family: "Lucida Console";
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: tomato;
+        line-height: 1;
+        margin-top: 40px;
+        margin-left: 180px;
+        word-spacing: 1px;
+      }
+
+      h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 38px;
+        color: rgb(255, 23, 178);
+        margin-top: 40px;
+        margin-left: 180px;
+        word-spacing: 5px;
+      } 
+
+      p5{
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: rgb(255, 23, 178);
+        margin-top: 60px;
+        margin-left: 180px;
+        word-spacing: 3.3px;
+        font-weight: bold;
+      }
+
+      h4{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        color: DodgerBlue;
+        color: rgb(255, 23, 178);
+        margin-left: 185px;
+        
+        font-weight: bold;
+      }
+
+      h5{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 14px;
+        color: DodgerBlue;
+        color: DodgerBlue;
+        margin-left: 185px;
+        
+        text-align: justify;
+      }
+
+      h6{
+        font-family: 'Inter', sans-serif;
+        font-weight: normal;
+        font-size: 20px;
+        color: DodgerBlue;
+        color: rgb(255, 23, 178);
+        margin-left: 170px;
+        
+        font-weight: bold;
+      }
+
+      a:link {
+        color: violet;
+        background-color: transparent;
+        text-decoration: none;
+      }
+    
+      a:hover {
+        color: rgb(248, 142, 237);
+        background-color: transparent;
+        text-decoration: underline;
+      }
+
+      .fa {
+        padding: 0px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      .fa:hover {
+        opacity: 0.7;
+      }
+
+      .fa-linkedin {
+        color: DodgerBlue;
+        margin-left: 185px;
+      }
+
+      .fa-instagram {
+        color: dodgerblue;
+        margin-left: 5px;
+      } 
+
+
+    
+    </style>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1079.0" data-gr-ext-installed="">
+
+    <br>
+    <h1>PHYSCI.70  [Wired, Radio and Bluetooth communication (IoT)] </h1>
+    <p5>JOSEPH WU</p5>
+    <p5>josephwu @ gsd . harvard . edu</p5>
+    <br>
+    <br>
+    <br>
+    <p4 style=" font-size: 14px; font-weight: normal; padding: 8px; width: 100px; outline: rgb(255, 23, 178) solid 1px; color: Gray; "> <a href="./index.html">    back </a></p4>
+    <br><br>
+    <h4 style="color:DodgerBlue;">  
+      <br><br>[ Owl_Intaface ]
+    </h4>
+
+    <h5 style="color:DodgerBlue;">
+    <p>We (Chase, Joseph and Dhruv) designed an owl. Our ideation process went through several stages, landing at an owl with a camera hooked up to it. The output is both the motor rotating and the image produced through the camera. The input will come through a website connected to a Google Firebase app, with which the MCU communicates. Information given by the user through the website goes through a Firebase Realtime Database, where it is regularly accessed by the MCU to determine its behavior (namely, motor speed and direction). </p>
+		
+    <br><br>
+    <h5 id="Output">Connecting a Motor to Firebase Database:
+  
+    <p>My first step was hooking up the ESP32, an MCU with built-in wireless connection capabilities, to a Firebase database. To do that, I followed 2 tutorials: one by <a href="https://nathanmelenbrink.github.io/lab/networking/huzzah1b.html">Nathan</a> and the other by <a href="https://randomnerdtutorials.com/esp32-firebase-realtime-database/">Rui Santos (RandomNerd)</a>. It wasn't too hard to figure everything out, and I thought I'd present a simple list here:</p>
+  
+    <p>
+    
+    Create a Firebase Realtime Database to Write and Read Data:<ol><li>Navigate to the <a href="https://firebase.google.com">Google Firebase homepage</a> and select <strong>Get started</strong>.</li>
+    <li>Create a project by clicking <strong>Add project</strong> and giving it a name.</li>
+    <li>Select <em>Realtime Database</em> from the menu on the left, click <strong>Create database</strong>. Do this in Test Mode, which is less secure, but makes connecting to the MCU easier.</li>
+    <li>Record the database URL.</li>
+    <li>Select the Gear icon in the top right of the left panel. Select <em>Project settings</em> &rarr; <em>Service accounts</em> &rarr; <em>Database secrets</em>. Hover over the secret key, select <em>Show</em>, copy the key, and record it. This will be used to allow the MCU access to the variables stored in the Realtime Database.</li><br>
+  <strong>*</strong> At this point, an MCU can be connected to the Realtime Database. However, we would have to edit data directly through the database. Thus, we will create a Firebase app, where we can interact with the database (read/write) through a more user-friendly webpage. <strong>*</strong><br><br>
+  
+  
+    <li>Select <em>Project Overview</em> from the top left of the left panel to navigate to the project homepage. Under the title <strong>Get started by adding Firebase to your app</strong>, select the Web icon (&lt;/&gt;).</li>
+    <li>Ignore the majority of text that appears under Step 2. Add Firebase SDK. Just copy and store all the variables contained within <code language="language-JavaScript">const firebaseConfig</code>.</li>
+    <li>Set up a webpage using the following code. Replace the values in the <code>firebaseConfig</code> variable with your own Firebase app details. This code creates a String variable in the Firebase database called <code>LED_STATUS</code> which can be toggled either ON or OFF. This offers a simple example of how interacting with a webpage through JavaScript elements can communicate information to the Realtime Database.</li>
+    
+    <br><br>
+    Finally, on to connecting this app to the MCU. In this case, I am using an ESP32.
+    <br><br>
+    <li>Download the library <strong>Firebase ESP32 Client</strong> by Mobizt. </li>
+    <li>Then, upload the following code for controlling an LED to your MCU, credit to Nathan Melenbrink.</li>
+
+
+    <br><br>
+    <li>Hook up your circuit, power up the MCU, and control the LED from your webpage!</li>
+								
+    </ol>
+  
+    </p>
+
+    <p>To translate this framework to the motor, I combined the code for interacting with the Firebase database through a webpage with previous work on a motor controlled with a L9110 motor driver. The code is presented below.</p>
+
+  
+
+  <br><br>
+  <br><br>
+  <h5 id="Input">Controlling a Motor Remotely:
+
+  <p>The two main behavioral parameters of a DC motor are direction and speed. I decided a slider would be the best interface for controlling this motor. The center of the slider is 0 speed; speed increases with absolute distance from the center of the slider. Moving the slider to the left indicates counterclockwise, while moving the slider to the right indicates clockwise. I learned how to create a slider from <a href="https://www.w3schools.com/howto/howto_js_rangeslider.asp">this W3Schools tutorial</a>. See below for a simple and janky example:</p>
+
+  <input type="range" min="1" max="100" value="50" align="center" margin="auto">
+
+  <p>I customized this a bit for the <a href="led_test1.html">Owl Interface</a>, where the range spans from -10 to 10, inclusive. These values are sent to the Firebase Realtime Database using JavaScript code modified from <a href="https://nathanmelenbrink.github.io/lab/networking/servo_demo.html">Nathan's Remote Servo Example</a>. I use an event listener triggered by <em>input</em>, which is triggered whenever the slider is moved. This listener then triggers a corresponding update of the SLIDER integer variable in the database, which can be read by the MCU. My code for controlling the motor through the ESP32 is shown below. It combines modified versions of both the remote servo control and previous code on controlling a motor through a motor driver with the ESP32 analog write capabilities (<code language="language-Arduino">ledcWrite()</code>).</p>
+
+  </h5>
+
+
+  <h5 style="color:DodgerBlue;">
+      <br><br>
+      <iframe width="720" height="405" src="https://www.youtube.com/embed/oUnPxmKR6co" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </h5>
+
+
+
+
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
