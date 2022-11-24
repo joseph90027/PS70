@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://bobboteck.github.io/joy/joy.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Joy</title>
+		
+		<meta name="description" content="Example page of use pure Javascript JoyStick">
+		<meta name="author" content="Roberto D&#39;Amico">
+		<link rel="shortcut icon" type="image/png" href="https://bobboteck.github.io/img/roberto-damico-bobboteck.png">
+		<style>
+*
+{
+	box-sizing: border-box;
+}
+body
+{
+	margin: 0px;
+	padding: 0px;
+	font-family: monospace;
+}
+.row
+{
+	display: inline-flex;
+	clear: both;
+}
+.columnLateral
+{
+  float: left;
+  width: 15%;
+  min-width: 300px;
+}
+.columnCetral
+{
+  float: left;
+  width: 70%;
+  min-width: 300px;
+}
+
+#joystick
+{
+	border: 1px solid #001eff;
+}
+
+</style>
+
+<script src="./Joy_files/joy.js.download"></script>
+
+</head>
+	<body data-new-gr-c-s-check-loaded="14.1087.0" data-gr-ext-installed="">
+		
+		<!-- Example of two JoyStick integrated in the page structure -->
+		<div class="row">
+			<div class="columnLateral">
+				<div id="joy1Div" style="width:200px;height:200px;"></canvas></div>
+				<br><br>
+				Posizione X:<input id="joy1PosizioneX" type="text"><br>
+				Posizione Y:<input id="joy1PosizioneY" type="text"><br>
+				Direzione:<input id="joy1Direzione" type="text"><br>
+				
+				X :<input id="joy1X" type="text"><br>
+				Y :<input id="joy1Y" type="text">
+			</div>
+		
+		</div>
+
+		<script type="text/javascript">
+
+		// Create JoyStick object into the DIV 'joy1Div'
+			var Joy1 = new JoyStick('joy1Div');
+			var joy1IinputPosX = document.getElementById("joy1PosizioneX");
+			var joy1InputPosY = document.getElementById("joy1PosizioneY");
+			var joy1Direzione = document.getElementById("joy1Direzione");
+			var joy1X = document.getElementById("joy1X");
+			var joy1Y = document.getElementById("joy1Y");
+
+			setInterval(function(){ joy1IinputPosX.value=Joy1.GetPosX(); }, 50);
+			setInterval(function(){ joy1InputPosY.value=Joy1.GetPosY(); }, 50);
+			setInterval(function(){ joy1Direzione.value=Joy1.GetDir(); }, 50);
+			setInterval(function(){ joy1X.value=Joy1.GetX(); }, 50);
+			setInterval(function(){ joy1Y.value=Joy1.GetY(); }, 50);
+
+		</script>
+	
+
+	</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>

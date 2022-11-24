@@ -8,6 +8,7 @@
 	<style>
 	.slidecontainer {
 	  width: 100%;
+	  color : white;
 	}
 
 	.slider {
@@ -48,83 +49,136 @@
 	  background: #000;
 	  cursor: pointer;
 	}
+
+	#joystick
+	{
+	border: 1px solid #001eff;
+	}
+
+	.columnLateral
+	{
+	float: left;
+	width: 15%;
+	min-width: 300px;
+	color:white;
+	}
+
 	</style>
 </head>
 
-<body>
+<script src="./Joy_files/joy.js.download"></script>
+<body style="background-color:gray;">
 	
 	<h1 align="center">ClothesBot INTERFACE</h1>
 	<button id="turn-on" name="turnon">Spin CW</button>
 	<button id="turn-off" name="turnoff">Spin CCW</button>
 	
 	<div class="slidecontainer">
-	  <input type="range" min="-10" max="10" value="0" class="slider" id="myRange">
-	  <p>Value: <span id="demo"></span></p>
+	  <input type="range" min="0" max="255" value="0" class="slider" id="myRange">
+	  <br><br>
+	  <p>Velocity Value: <span id="demo"></span></p>
 	</div>
 	
 	<br>
 	<!--<img src="http://192.168.0.135" alt="">-->
 	
-	<p><a href="http://192.168.0.135">Camera</a></p>
+
+
+	<div class="row">
+		<div class="columnLateral">
+			<div id="joy1Div" style="width:200px;height:200px; "></canvas></div>
+			<br><br>
+			Posizione X:<input id="joy1PosizioneX" type="text"><br>
+			Posizione Y:<input id="joy1PosizioneY" type="text"><br>
+			Direzione:<input id="joy1Direzione" type="text"><br>
+			
+			X :<input id="joy1X" type="text"><br>
+			Y :<input id="joy1Y" type="text">
+		</div>
+	
+	</div>
 	 
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+		https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 
-<script>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-	var firebaseConfig = {
-    apiKey: "AIzaSyAqesU6O4cVU_Txtfs3_3kzsj6OhPyvj14",
-    authDomain: "clothesbot-3734c.firebaseapp.com",
-    databaseURL: "https://clothesbot-3734c-default-rtdb.firebaseio.com",
-    projectId: "clothesbot-3734c",
-    storageBucket: "clothesbot-3734c.appspot.com",
-    messagingSenderId: "339919631766",
-    appId: "1:339919631766:web:bf4ec668b28f86fb8d19b7"
-	};
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
 
-	// Get a database reference to our blog
-	var ref = firebase.database().ref("/");
-	// var database = firebase.database();
 
-	// make the buttons call the function below 
-	document.getElementById('turn-on').addEventListener('click', turnOn, false);
-	document.getElementById('turn-off').addEventListener('click', turnOff, false);
-	document.getElementById("myRange").addEventListener('input', sliderUpdate, false);
+	<script>
+	// Your web app's Firebase configuration
+	// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+		var firebaseConfig = {
+		apiKey: "AIzaSyAqesU6O4cVU_Txtfs3_3kzsj6OhPyvj14",
+		authDomain: "clothesbot-3734c.firebaseapp.com",
+		databaseURL: "https://clothesbot-3734c-default-rtdb.firebaseio.com",
+		projectId: "clothesbot-3734c",
+		storageBucket: "clothesbot-3734c.appspot.com",
+		messagingSenderId: "339919631766",
+		appId: "1:339919631766:web:bf4ec668b28f86fb8d19b7"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		firebase.analytics();
 
-	function turnOn(){
-		console.log("turning CCW");
-		ref.update({
-			"SLIDER": 1
-		});
-	}
+		// Get a database reference to our blog
+		var ref = firebase.database().ref("/");
+		// var database = firebase.database();
 
-	function turnOff(){
-		console.log("turning CW");
-		ref.update({
-			"SLIDER": 100
-		});
-	}
-	
-	function sliderUpdate() {
-		console.log("I'm sliding, baby!");
-		ref.update({"SLIDER": parseInt(this.value)});
-		output.innerHTML = this.value;
-	}
-	
-	// W3 Example
-	var output = document.getElementById("demo");
-	output.innerHTML = slider.value;
-</script>
+		// make the buttons call the function below 
+		document.getElementById('turn-on').addEventListener('click', turnOn, false);
+		document.getElementById('turn-off').addEventListener('click', turnOff, false);
+		document.getElementById("myRange").addEventListener('input', sliderUpdate, false);
+
+		function turnOn(){
+			console.log("turning CCW");
+			ref.update({
+				"SLIDER": 1
+			});
+		}
+
+		function turnOff(){
+			console.log("turning CW");
+			ref.update({
+				"SLIDER": 100
+			});
+		}
+		
+		function sliderUpdate() {
+			console.log("I'm sliding, baby!");
+			ref.update({"SLIDER": parseInt(this.value)});
+			output.innerHTML = this.value;
+		}
+		
+		// W3 Example
+		var output = document.getElementById("demo");
+		output.innerHTML = slider.value;
+		
+	</script>
+
+
+	<script type="text/javascript">
+
+		// Create JoyStick object into the DIV 'joy1Div'
+			var Joy1 = new JoyStick('joy1Div');
+			var joy1IinputPosX = document.getElementById("joy1PosizioneX");
+			var joy1InputPosY = document.getElementById("joy1PosizioneY");
+			var joy1Direzione = document.getElementById("joy1Direzione");
+			var joy1X = document.getElementById("joy1X");
+			var joy1Y = document.getElementById("joy1Y");
+
+			setInterval(function(){ joy1IinputPosX.value=Joy1.GetPosX(); }, 50);
+			setInterval(function(){ joy1InputPosY.value=Joy1.GetPosY(); }, 50);
+			setInterval(function(){ joy1Direzione.value=Joy1.GetDir(); }, 50);
+			setInterval(function(){ joy1X.value=Joy1.GetX(); }, 50);
+			setInterval(function(){ joy1Y.value=Joy1.GetY(); }, 50);
+
+	</script>
+
 
 </body>
 </html>
