@@ -67,16 +67,20 @@
 </head>
 
 <script src="./Joy_files/joy.js.download"></script>
+
+
+
 <body style="background-color:gray;">
 	
 	<h1 align="center">ClothesBot INTERFACE</h1>
-	<button id="turn-on" name="turnon">Spin CW</button>
-	<button id="turn-off" name="turnoff">Spin CCW</button>
+	<button id="turn-on" name="turnon">Turn On</button>
+	<button id="turn-off" name="turnoff">Turn Off</button>
 	
 	<div class="slidecontainer">
 	  <input type="range" min="0" max="255" value="0" class="slider" id="myRange">
 	  <br><br>
 	  <p>Velocity Value: <span id="demo"></span></p>
+
 	</div>
 	
 	<br>
@@ -134,15 +138,18 @@
 		document.getElementById('turn-off').addEventListener('click', turnOff, false);
 		document.getElementById("myRange").addEventListener('input', sliderUpdate, false);
 
+		document.getElementById("joy1Div").addEventListener('click', joystickXUpdate, false);
+		//document.getElementById("joystick_Y").addEventListener('input', joystickYUpdate, false);
+
 		function turnOn(){
-			console.log("turning CCW");
+			console.log("turning on");
 			ref.update({
 				"SLIDER": 1
 			});
 		}
 
 		function turnOff(){
-			console.log("turning CW");
+			console.log("turning off");
 			ref.update({
 				"SLIDER": 100
 			});
@@ -151,18 +158,35 @@
 		function sliderUpdate() {
 			console.log("I'm sliding, baby!");
 			ref.update({"SLIDER": parseInt(this.value)});
+			// output.innerHTML = this.value;
+			var output = document.getElementById("demo");
 			output.innerHTML = this.value;
 		}
+
+
+		function joystickXUpdate() {
+			console.log("joystickX, baby!");
+
+			var joy1IinputPosX = document.getElementById("joy1PosizioneX");
+			ref.update({"JoyStick_XAxis": parseInt(joy1IinputPosX.value)});
+			//ref.update({"JoyStick_XAxis": parseInt(this.value)});	
+			setInterval(function(){ joy1IinputPosX.value=Joy1.GetPosX(); }, 50);
+			console.log(joy1IinputPosX.value);
+
+			joy1IinputPosX.innerHTML = this.value;
+		}
+
+		function joystickYUpdate() {
+			console.log("joystickY, baby!");
+			ref.update({"JoyStick_YAxis": parseInt(this.value)});
+			joy1IinputPosY.innerHTML = this.value;
+		}
 		
-		// W3 Example
-		var output = document.getElementById("demo");
-		output.innerHTML = slider.value;
-		
+
 	</script>
 
 
 	<script type="text/javascript">
-
 		// Create JoyStick object into the DIV 'joy1Div'
 			var Joy1 = new JoyStick('joy1Div');
 			var joy1IinputPosX = document.getElementById("joy1PosizioneX");
@@ -176,7 +200,6 @@
 			setInterval(function(){ joy1Direzione.value=Joy1.GetDir(); }, 50);
 			setInterval(function(){ joy1X.value=Joy1.GetX(); }, 50);
 			setInterval(function(){ joy1Y.value=Joy1.GetY(); }, 50);
-
 	</script>
 
 
