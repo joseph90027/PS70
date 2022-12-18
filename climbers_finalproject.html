@@ -38,7 +38,7 @@
         font-size: 16px;
         color: rgb(255, 23, 178);
         margin-top: 60px;
-        margin-left: 180px;
+        margin-left: 185px;
         word-spacing: 3.3px;
         font-weight: bold;
       }
@@ -125,25 +125,44 @@
     <h4 style="color:DodgerBlue;">  
       <br><br>[ Climbers ]
     </h4>
-    <h5 style="color:DodgerBlue;">
-      
-      
-      Stepless is a modular-discrete stair, based on a computational understanding of the interlocking toy brick. Inspired by M.C. Escher "Relativity", Stairs, an indispensable element for connecting spaces, become surreal and symmetrical. I reinterpret the meaning of stairs, as it will gradually lose its functionality, which are the "missing steps" in this case. 
+    <h5 style="color:DodgerBlue;">    
+      "Climbers" is a mobile robot that moves along soft surfaces such as fabric and textiles. It navigates up or down the material and rotates using specialized climbing mechanisms. This type of robot could be used in a variety of applications, including search and rescue operations, an inspection of industrial or commercial facilities, or even as a household assistant for tasks such as laundry or cleaning.
       <br><br>
       <iframe width="840" height="472.5" src="https://www.youtube.com/embed/gq6RmwVM5tw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <br><br><br><br>    
     </h5>
 
 
+    <h4 style="color:DodgerBlue;">  
+      <br><br>[ Future Research Direction ]
+    </h4>
 
-    <br>
+    <h5>
+      The design of such a robot would likely involve several key components in the future, including:
+      <br><br>
+      __Mobility system: This could include wheels, tracks, or other mechanisms for movement along soft surfaces, as well as specialized climbing components for navigating the fabric.
+      <br>
+      __Sensors: The robot would need sensors to help it navigate and avoid obstacles, such as cameras, lidar, or ultrasonic sensors.
+      <br>
+      __Control system: This would include the hardware and software to process sensor data and direct the robot's movements.
+      <br>
+      __Power source: The robot would need a reliable power source, such as a battery, to enable it to operate for extended periods.
+    </h5>>
 
 
+
+    <h4 style="color:DodgerBlue;">  
+      [ Project Development ]
+    </h4>
     
     <h5>
+      The first task was to smoothly control an N20 motor and try to make the motor work. It took me some time because it's unlike a traditional servo motor.      <br><br>
       <img src="./clothesbot/IMG_8002.jpg" alt="missing link" width="720" height="405">
     </h5>
 
     <h5>
+      Inspired by car mechanisms and the previous research, I modeled the 3d form on 3d software; I used only two motors and tried to fit two engines on each side.
+      <br><br>
       <img src="./clothesbot/IMG_8003.png" alt="missing link" width="720" height="405">
     </h5>
 
@@ -152,12 +171,20 @@
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8005.MOV">
       </video>
+      <br><br>
+      My robot did not move properly in the first version, which is under my expection loll.
+      <br>
+      As the video showed, the friction of the pla printed part is not enough to make it rotates.  
     </h5>
 
     <h5>
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8113.MOV">
       </video>
+      <br><br>
+      I decided to add gears on both the upper and downer part and print it out.
+      <br>
+      It rotates successfully, but it works oddly due to the printing quality and accuracy.
     </h5>
 
 
@@ -167,8 +194,12 @@
 
     <h5>
       <video controls muted loop width="720">
-        //<source src="./clothesbot/IMG_8118.MOV">
+        <source src="./clothesbot/IMG_8118.MOV">
       </video>
+      <br><br>
+      Since that it's working, why not test it out on textile?
+      <br>
+      Besides the gear problem, I found out that the magnetic force is also not strong to make them clip to each other.
     </h5>
     
     <h5>
@@ -181,6 +212,12 @@
 
     <h5>
       <img src="./clothesbot/IMG_8241.jpg" alt="missing link" width="500" height="720">
+      <br><br>
+      In order to not make it over complicated, I decided to remove the gear and just focus on how to increase the friction.
+      <br>
+      Also, one crucial reason why removing gears is that it will have to install additional chains to turn directions.
+      <br>
+      So instead, I bought rubber rings from Amazon to test it out.
     </h5>
 
 
@@ -189,15 +226,20 @@
     </h5>
 
     <h5>
-      <video controls muted loop width="400">
+      <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8244.MOV">
       </video>
+      <br><br>
+      And then it worked!!!!!!!!!
     </h5>
 
     <h5>
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8245.MOV">
       </video>
+    
+    <br><br>
+    First time seeing it. It is actually "climbing"!!
     </h5>
 
     <h5>
@@ -210,6 +252,11 @@
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8248.MOV">
       </video>
+      <br><br>
+      But a new problem occurred, the magnetic force decreased after putting on the rubber,
+      <br>
+      it can only climb toward the ground. 
+
     </h5>
 
 
@@ -224,6 +271,8 @@
 
     <h5>
       <img src="./clothesbot/IMG_8267.jpg" alt="missing link" width="720" height="405">
+      <br><br>
+      I tried adding more magnets to the parts to increase the clipping force.
     </h5>
 
     <h5>
@@ -238,18 +287,31 @@
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8271.MOV">
       </video>
+      <br><br>
+      It even made it worse.....now it can't even move......
     </h5>
 
     <h5>
       <img src="./clothesbot/IMG_8275.jpg" alt="missing link" width="405" height="600">
+      <br><br>
+      So what's the problem?
+      <br>
+      It turned out that because the downer part was not a stick anymore,
+      <br>
+      it would tilt on one side, causing instability and too much friction.
     </h5>
 
     <h5>
       <img src="./clothesbot/IMG_8276.jpg" alt="missing link" width="720" height="405">
+      <br><br>
+      After long consideration, maybe adding more magnets on the wheels would be a better solution. 
+      <br>
+      I also removed the 3d printing wheel covering to maximize the force. 
     </h5>
 
     <h5>
       <img src="./clothesbot/IMG_8352.jpg" alt="missing link" width="720" height="405">
+
     </h5>
 
     <h5>
@@ -260,30 +322,43 @@
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8356.mp4">
       </video>
+      <br><br>
+      Now it was actually working!!!!!!!!!!!!! woohoo  
     </h5>
 
     <h5>
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8357.MOV">
       </video>
+
     </h5>
 
     <h5>
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8360.MOV">
       </video>
+      <br><br>
+      The robot worked perfectly in one direction.
+      <br>
+      But I could not turn it in a different direction.
     </h5>
 
     <h5>
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8361.mp4">
       </video>
+      <br><br>
+      The solution of it was to add a bearing at the downer part, 
+      <br>
+      to let the wheels have the ability to rotate themselves rather than the whole stick move at the same time.
     </h5>
 
     <h5>
       <video controls muted loop width="720">
         <source src="./clothesbot/IMG_8364.MOV">
       </video>
+      <br><br>
+      And Finally, after the six versions, I could control the robot like a car!!!!!
     </h5>
 
     <h5>
@@ -448,6 +523,8 @@
     
       </code></pre> 
     </h5>
+
+
 
     
     
